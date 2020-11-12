@@ -23,31 +23,34 @@ skinparam class {
 }
 
 package "開発対象システム" as target_system {
-    entity "事業所テーブル(companies)" as order <<M,MASTER_MARK_COLOR>> MAIN_ENTITY {
-        + ID [PK]
+    entity "事業所マスタ(companies)" as order <<M,MASTER_MARK_COLOR>> MAIN_ENTITY {
+        + 事業所ID [PK](company_id)
         --
-        # 顧客ID [FK]
-        注文日時
-        配送希望日
-        配送方法
-        お届け先名
-        お届け先住所
-        決済方法
-        合計金額
-        消費税額
+        事業所名(company_name)
+        電話番号(phone)
+        郵便番号(zip_code)
+        住所(address)
+        登録日時(created_at)
+        更新日時(updated_at)
+        削除日時(deleted_at)
+        削除フラグ(is_deleted)
     }
 
-    entity "注文明細テーブル" as order_detail <<T,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
-        + 注文ID   [PK]
-        + 明細番号 [PK]
+    entity "ユーザーマスタ(users)" as order_detail <<T,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
+        + ユーザID [PK](user_id)
         --
-        # SKU [FK]
-        注文数
-        税抜価格
-        税込価格
+        # 事業所ID [FK](company_id)
+        姓(last_name)
+        名(firtst_name)
+        メールアドレス(email)
+        # 権限 [FK](authority_id)
+        登録日時(created_at)
+        更新日時(updated_at)
+        削除日時(deleted_at)
+        削除フラグ(is_deleted
     }
 
-    entity "SKUマスタ" as sku <<M,MASTER_MARK_COLOR>> {
+    entity "権限マスタ" as sku <<M,MASTER_MARK_COLOR>> {
         + SKU [PK]
         --
         # 商品ID [FK]
