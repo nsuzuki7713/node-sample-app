@@ -47,38 +47,40 @@ package "開発対象システム" as target_system {
         登録日時(created_at)
         更新日時(updated_at)
         削除日時(deleted_at)
-        削除フラグ(is_deleted
+        削除フラグ(is_deleted)
     }
 
-    entity "権限マスタ" as sku <<M,MASTER_MARK_COLOR>> {
-        + SKU [PK]
+    entity "権限マスタ(authority)" as sku <<M,MASTER_MARK_COLOR>> {
+        + 権限ID [PK](authority_id)
         --
-        # 商品ID [FK]
-        カラー
-        サイズ
-        重量
-        販売単価
-        仕入単価
+        権限名(authority_name)
+        登録日時(created_at)
     }
 
-    entity "商品マスタ" as product <<M,MASTER_MARK_COLOR>> {
-        + 商品ID [PK]
+    entity "Documents" as product <<M,MASTER_MARK_COLOR>> {
+        + ドキュメントID(document_id) [PK]
         --
-        商品名
-        原産国
-        # 仕入先ID [FK]
-        商品カテゴリ
-        配送必要日数
+        ドキュメント名
+        # 事業所ID [FK](company_id)
+        ステータス
+        タイトル
+        クライアント名
+        自社名
+        契約開始日
+        契約終了日
+        契約締結日
+        更新拒絶期日
+        メモ
+        ドキュメント
+        登録日時(created_at)
+        更新日時(updated_at)
     }
 
-    entity "仕入先マスタ" as vendor <<M,MASTER_MARK_COLOR>> {
-        + 仕入先ID [PK]
+    entity "ステータスマスタ" as vendor <<M,MASTER_MARK_COLOR>> {
+        + ステータスID [PK]
         --
-        仕入れ先名
-        郵便番号
-        住所
-        電話番号
-        FAX番号
+        ステータス名
+        登録日時(created_at)
     }
 }
 
