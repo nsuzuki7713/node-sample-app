@@ -23,7 +23,7 @@ skinparam class {
 }
 
 package "開発対象システム" as target_system {
-    entity "事業所マスタ(companies)" as order <<M,MASTER_MARK_COLOR>> MAIN_ENTITY {
+    entity "事業所マスタ(companies)" as companies <<M,MASTER_MARK_COLOR>> MAIN_ENTITY {
         + 事業所ID [PK](company_id)
         --
         事業所名(company_name)
@@ -36,7 +36,7 @@ package "開発対象システム" as target_system {
         削除フラグ(is_deleted)
     }
 
-    entity "ユーザーマスタ(users)" as order_detail <<T,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
+    entity "ユーザーマスタ(users)" as users <<M,MASTER_MARK_COLOR>> MAIN_ENTITY {
         + ユーザID [PK](user_id)
         --
         # 事業所ID [FK](company_id)
@@ -50,14 +50,14 @@ package "開発対象システム" as target_system {
         削除フラグ(is_deleted)
     }
 
-    entity "権限マスタ(authority)" as sku <<M,MASTER_MARK_COLOR>> {
+    entity "権限マスタ(authority)" as authority <<M,MASTER_MARK_COLOR>> MAIN_ENTITY {
         + 権限ID [PK](authority_id)
         --
         権限名(authority_name)
         登録日時(created_at)
     }
 
-    entity "Documents" as product <<M,MASTER_MARK_COLOR>> {
+    entity "Documents" as documents <<M,TRANSACTION_MARK_COLOR>> MAIN_ENTITY_2 {
         + ドキュメントID(document_id) [PK]
         --
         ドキュメント名
@@ -76,7 +76,7 @@ package "開発対象システム" as target_system {
         更新日時(updated_at)
     }
 
-    entity "ステータスマスタ" as vendor <<M,MASTER_MARK_COLOR>> {
+    entity "ステータスマスタ" as status <<M,MASTER_MARK_COLOR>> MAIN_ENTITY {
         + ステータスID [PK]
         --
         ステータス名
@@ -84,5 +84,9 @@ package "開発対象システム" as target_system {
     }
 }
 
+companies ||--o{ users
+companies ||--o{ documents
+users ||--|| authority
+documents ||--|| status
 
 @enduml
