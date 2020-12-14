@@ -5,6 +5,7 @@ module.exports = {
   username: 'docker',
   password: 'docker',
   database: 'test_database',
+  dropSchema: false,
   synchronize: false, // アプリケーションを起動するたびにデータベーススキーマを自動作成するか
   logging: true, // ロギングが有効かどうか
   entities: ['src/entity/**/*.ts'],
